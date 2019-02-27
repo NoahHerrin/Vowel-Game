@@ -2,7 +2,7 @@
   "name": "vowel-game",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -18,9 +18,11 @@
   "homepage": "https://github.com/NoahHerrin/Vowel-Game#readme",
   "dependencies": {
     "body-parser": "^1.18.3",
+    "check-word": "^1.1.0",
     "ejs": "^2.6.1",
     "express": "^4.16.4",
     "oxford-dictionary": "^1.4.1",
-    "oxford-dictionary-api": "^1.0.1"
+    "oxford-dictionary-api": "^1.0.1",
+    "spellchecker": "^3.5.1"
   }
 }

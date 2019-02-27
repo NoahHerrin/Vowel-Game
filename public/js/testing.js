@@ -1,3 +1,44 @@
+var submitted = false;
+
+function switch_true() {
+  let url = "http://localhost:4000/true"
+  fetch(url).then(function(res) {
+    // Res will be a Response object.
+    // Use res.text() or res.json() to get the information that the Node program sent.
+    var value = res.text().then(function(data) {
+      var result = JSON.parse(data);
+      if (result.response == true) {
+        document.querySelector("#word").style.color = "green";
+      } else {
+        document.querySelector("#word").style.color = "red";
+      }
+
+
+    });
+
+  });
+}
+
+function switch_false() {
+  let url = "http://localhost:4000/false";
+  fetch(url).then(function(res) {
+    // Res will be a Response object.
+    // Use res.text() or res.json() to get the information that the Node program sent.
+    var value = res.text().then(function(data) {
+      var result = JSON.parse(data);
+      if (result.response == false) {
+        document.querySelector("#word").style.color = "red";
+      } else {
+        document.querySelector("#word").style.color = "red";
+      }
+
+
+    });
+
+  });
+
+}
+
 var word = ['*'];
 const vowels = ['a', 'e', 'i', 'o', 'u'];
 var ptr = 0;
@@ -10,6 +51,7 @@ window.addEventListener('keydown', function(e) {
 
     let letter = e.key;
     if (!isVowel(letter)) {
+      newTry();
       insertLetter(letter);
       display.textContent = displayWord();
     } else {}
@@ -18,6 +60,7 @@ window.addEventListener('keydown', function(e) {
     switch (keycode) {
       case 8:
         deleteLetter();
+        newTry();
         display.textContent = displayWord();
         break;
       case 37:
@@ -31,6 +74,7 @@ window.addEventListener('keydown', function(e) {
       case 13:
         console.log("Submit: " + displayWord());
         validateWord(toString());
+        submitted = true;
         break
     }
   }
@@ -120,19 +164,29 @@ function isVowel(letter) {
 }
 
 function validateWord(word) { // The id of your input was "begriff", not "name"
-  var url = 'http://localhost:4000/vowel?term=' + word;
+  var url = 'http://localhost:4000/word?term=' + word;
   // Now send a request to your Node program
   fetch(url).then(function(res) {
     // Res will be a Response object.
     // Use res.text() or res.json() to get the information that the Node program sent.
     var value = res.text().then(function(data) {
       var result = JSON.parse(data);
-      console.log(data);
-
+      console.log(result.response);
+      if (result.response == true) {
+        document.querySelector("#word").style.color = "green";
+      } else {
+        document.querySelector("#word").style.color = "red";
+      }
 
     });
 
   });
+}
+//Changes word color back to black when the start a new attempt
+function newTry() {
+  if (submitted === true) {
+    document.querySelector("#word").style.color = "black";
+  }
 }
 generateVowels(2);
 display.textContent = displayWord();
