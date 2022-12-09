@@ -20,7 +20,7 @@
     "body-parser": "^1.18.3",
     "check-word": "^1.1.0",
     "ejs": "^2.6.1",
-    "express": "^4.16.4",
+    "express": "^4.17.3",
     "oxford-dictionary": "^1.4.1",
     "oxford-dictionary-api": "^1.0.1",
     "spellchecker": "^3.5.1"
